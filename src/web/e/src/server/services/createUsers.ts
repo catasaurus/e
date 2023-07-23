@@ -11,12 +11,19 @@ const openai = new OpenAIApi(configuration);
 // generates users based on 3 lists of traits
 // returns bio's / ChatGPT system messages
 export default function generateUsers(mainTraits: string[], subTraits: string[], miniTraits: string[]): string[] {
-    let combinations: string[][] = [];
+    let combinations: string[] = [];
+    let newUser: string;
 
-    // new entry combination
-    let combination: string[];
     for (let a in mainTraits) {
-        
+        let combination: (string | undefined)[] = [mainTraits[a]];
+        for (let b in subTraits) {
+            combination[1] = subTraits[b];
+            for (let c in miniTraits) {
+                combination[2] = subTraits[c];
+                newUser = "You are a " + combination[0] + ". You also " + combination[1] + ". A fact about you is that you: " + combination[2];
+                combinations.push(newUser)
+            }
+        }
 }
-    return ["a", "a"]
+    return combinations
 }
