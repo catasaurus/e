@@ -25,11 +25,11 @@ export default async function askQuestion(user: string, question: string): Promi
             return result.data.choices[0]?.message?.content
         }
     })
-    let result: boolean = false;
+
     if (completion != undefined) {
         if (completion.toLowerCase() == 'yes') {
             return true;
         }
     }
-    return result;
+    return false;
 }
