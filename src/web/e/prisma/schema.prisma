@@ -63,22 +63,9 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-// person in a survey
-model SurveyUser {
-  id            String       @id @default(cuid())
-  mainTrait     String
-  subTrait      String
-  miniTrait     String
-  surveyEntry   SurveyEntry @relation(fields: [surveyEntryId], references: [id])
-  surveyEntryId String
-
-  @@index([surveyEntryId])
-}
-
 model SurveyEntry {
   id           String     @id @default(cuid())
-  surveyUser   SurveyUser[]
-  question     String
+  user         String
   result       Boolean
   survey       Survey     @relation(fields: [surveyId], references: [id])
   surveyId     String
@@ -91,6 +78,9 @@ model Survey {
   SurveyEntry SurveyEntry[]
   user        User          @relation(fields: [userId], references: [id])
   userId      String
+  // used for tracking progress (using length of SurveyEntry)
+  userCount   Int
+  question    String
 
   @@index([userId])
 }
