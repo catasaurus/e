@@ -38,7 +38,7 @@ export async function runSurvey(mainTraits: string[], subTraits: string[], miniT
 
 
 // for running in deno
-export type entry = {
+export interface entry {
     user: string,
     result: boolean,
 }
@@ -46,7 +46,7 @@ export type entry = {
 export async function runSurveyNoPrisma(mainTraits: string[], subTraits: string[], miniTraits: string[], question: string): Promise<entry[]> {
     const users = generateUsers(mainTraits, subTraits, miniTraits);
     const userLength = users.length;
-    let entries: entry[] = [];
+    const entries: entry[] = [];
 
     for (const user of users) {
         const answer = await askQuestionPalm(user, question);
