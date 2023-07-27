@@ -5,7 +5,8 @@ import { z } from "zod";
 
 // for PALM
 const MODEL_NAME: string = "models/text-bison-001";
-const API_KEY: string = z.string().parse(process.env.PALM_API_KEY);
+//const API_KEY: string = z.string().parse(process.env.PALM_API_KEY);
+const API_KEY: string = "AIzaSyD16HMXrXJZ87YNmtpNOB-_kD0uBDHTWcs"
 
 const client = new TextServiceClient({
     authClient: new GoogleAuth().fromAPIKey(API_KEY),
