@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { createTRPCRouter, publicProcedure, protectedProcedure } from "e/server/api/trpc";
-import runSurvey from "e/server/services/runSurvey";
+import { runSurvey } from "e/server/services/runSurvey";
 
 /*
 const surveyRouter = createTRPCRouter({

@@ -2,7 +2,7 @@ import generateUsers from "./createUsers";
 import { askQuestionPalm } from "./askQuestion";
 import { PrismaClient } from "@prisma/client";
 
-export default async function runSurvey(mainTraits: string[], subTraits: string[], miniTraits: string[], question: string, userId: string): Promise<void> {
+export async function runSurvey(mainTraits: string[], subTraits: string[], miniTraits: string[], question: string, userId: string): Promise<void> {
     const prisma = new PrismaClient()
     const users = generateUsers(mainTraits, subTraits, miniTraits);
     const userLength = users.length;
