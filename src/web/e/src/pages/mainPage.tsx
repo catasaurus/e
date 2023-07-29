@@ -28,7 +28,7 @@ export default function MainPage() {
     
     useEffect(() => {
         if (!session) {
-            router.push('/')
+            void router.push('/')
         }
     })
     
