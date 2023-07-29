@@ -59,6 +59,6 @@ export default function Home() {
   }
 
   else {
-    void router.push('/mainPage');
+    void router.push('/MainPage');
   }
 }

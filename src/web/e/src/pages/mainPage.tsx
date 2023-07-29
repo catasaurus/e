@@ -21,6 +21,10 @@ export default function MainPage() {
         setIsHovered(false);
     }
 
+    function newSurveyOnClick() {
+        void router.push('/NewSurvey')
+    }
+
     let newSurveyButtonStyle = "flex bg-black h-16 w-32 text-center text-white rounded-lg m-5 relative";
     if (isHovered) {
         newSurveyButtonStyle = "flex bg-black h-20 w-36 text-center text-white rounded-lg m-5 relative"
@@ -35,7 +39,7 @@ export default function MainPage() {
 
     return (
         <div className="flex justify-center">
-            <div className={newSurveyButtonStyle} onMouseEnter={newSurveyButtonOnMouseEnter} onMouseLeave={newSurveyButtonOnMouseLeave}>
+            <div className={newSurveyButtonStyle} onMouseEnter={newSurveyButtonOnMouseEnter} onMouseLeave={newSurveyButtonOnMouseLeave} onClick={newSurveyOnClick}>
                 <span className="m-auto">New survey</span>
             </div>
         </div>

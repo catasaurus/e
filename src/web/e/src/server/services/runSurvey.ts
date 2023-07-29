@@ -2,8 +2,7 @@ import generateUsers from "./createUsers";
 import { askQuestionPalm } from "./askQuestion";
 import { PrismaClient } from "@prisma/client";
 
-export async function runSurvey(mainTraits: string[], subTraits: string[], miniTraits: string[], question: string, userId: string): Promise<void> {
-    const prisma = new PrismaClient()
+export async function runSurvey(mainTraits: string[], subTraits: string[], miniTraits: string[], question: string, userId: string, prisma: PrismaClient): Promise<void> {
     const users = generateUsers(mainTraits, subTraits, miniTraits);
     const userLength = users.length;
 
@@ -37,7 +36,7 @@ export async function runSurvey(mainTraits: string[], subTraits: string[], miniT
 }
 
 
-// for running in deno
+// for running in deno / ts-node
 export interface entry {
     user: string,
     result: boolean,
