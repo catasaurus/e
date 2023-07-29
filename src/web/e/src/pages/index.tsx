@@ -20,6 +20,10 @@ export default function Home() {
       setIsHovered(false)
     }
 
+    function onClickGetStarted(): void {
+      void signIn()
+    }
+
     let authButtonStyle = "flex bg-gray-600 h-20 w-32 text-xl text-center rounded-lg"
     if (isHovered) {
       authButtonStyle = "flex bg-gray-600 h-24 w-36 text-xl text-center rounded-lg"
@@ -41,7 +45,7 @@ export default function Home() {
           </div>
 
           <div className="flex flex-auto justify-center flex-row space-x-28 relative inset-y-44">
-            <div className={authButtonStyle} onMouseEnter={onMouseEnterAuthButton} onMouseLeave={onMouseLeaverAuthButton} onClick={() => signIn()}>
+            <div className={authButtonStyle} onMouseEnter={onMouseEnterAuthButton} onMouseLeave={onMouseLeaverAuthButton} onClick={onClickGetStarted}>
               <span className="m-auto">Get Started</span>
             </div>
             <div className="flex bg-gray-600 h-20 w-32 text-xl text-center rounded-lg">
@@ -55,6 +59,6 @@ export default function Home() {
   }
 
   else {
-    router.push('/mainPage');
+    void router.push('/mainPage');
   }
 }

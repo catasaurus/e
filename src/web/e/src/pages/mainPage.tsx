@@ -8,7 +8,7 @@ export interface mainPageProps {
 }
 */
 
-export default function mainPage() {
+export default function MainPage() {
     const { data: session } = useSession();
     const router = useRouter();
     const [isHovered, setIsHovered] = useState(false);
