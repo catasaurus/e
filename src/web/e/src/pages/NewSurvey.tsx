@@ -19,7 +19,7 @@ export default function NewSurvey() {
         <div>
             <Formik
                 initialValues={{
-                    mainTraits: ['I am a', 'I am a', 'I am a'],
+                    mainTraits: ['', '', ''],
                     subTraits: ['', '', ''],
                     miniTraits: ['', '', ''],
                     question: ''
@@ -37,25 +37,50 @@ export default function NewSurvey() {
 
             >
                 {({isSubmitting}) => (
-                    <Form>
-                        <Field name='mainTraits[0]'></Field>
-                        <Field name='mainTraits[1]'></Field>
-                        <Field name='mainTraits[2]'></Field>
+                    <div className="flex flex-row justify-center">
+                        <Form className="flex flex-col">
+                            <div className="flex flex-col justify-center h-screen bg-gray-500">
+                                <div className="m-6 text-black text-center text-5xl">
+                                    Main traits
+                                </div>
+                                <div className="flex flex-col justify-center text-white m-12">
+                                    <Field className="m-4 bg-black h-16 w-64 rounded-lg" name='mainTraits[0]'/>
+                                    <Field className="m-4 bg-black h-16 rounded-lg" name='mainTraits[1]'/>
+                                    <Field className="m-4 bg-black h-16 rounded-lg" name='mainTraits[2]'/>
+                                </div>
+                            </div>
 
-                        <Field name='subTraits[0]'></Field>
-                        <Field name='subTraits[1]'></Field>
-                        <Field name='subTraits[2]'></Field>
+                            <div className="flex flex-col justify-center h-screen bg-gray-500">
+                                <div className="m-6 text-black text-center text-5xl">
+                                    Sub traits
+                                </div>
+                                <div className="flex flex-col justify-center text-white m-12">
+                                    <Field className="m-4 bg-black h-16 w-64 rounded-lg" name='subTraits[0]'/>
+                                    <Field className="m-4 bg-black h-16 rounded-lg" name='subTraits[1]'/>
+                                    <Field className="m-4 bg-black h-16 rounded-lg" name='subTraits[2]'/>
+                                </div>
+                            </div>
 
-                        <Field name='miniTraits[0]'></Field>
-                        <Field name='miniTraits[1]'></Field>
-                        <Field name='miniTraits[2]'></Field>
+                            <div className="flex flex-col justify-center h-screen bg-gray-500">
+                                <div className="m-6 text-black text-center text-5xl">
+                                    Mini traits
+                                </div>
+                                <div className="flex flex-col justify-center text-white m-12">
+                                    <Field className="m-4 bg-black h-16 w-64 rounded-lg" name='miniTraits[0]'/>
+                                    <Field className="m-4 bg-black h-16 rounded-lg" name='miniTraits[1]'/>
+                                    <Field className="m-4 bg-black h-16 rounded-lg" name='miniTraits[2]'/>
+                                </div>
+                            </div>
 
-                        <Field name='question'></Field>
+                            <div className="flex flex-col justify-center h-screen bg-gray-500 text-white">
+                                <Field name="question" className="m-4 bg-black h-16 w-64 rounded-lg"/>
 
-                        <button type="submit" disabled={isSubmitting}>
-                            Submit
-                        </button>
-                    </Form>
+                                <button type="submit" disabled={isSubmitting} className="m-4 bg-black h-12 w-28 rounded-lg">
+                                    Submit
+                                </button>
+                            </div>
+                        </Form>
+                    </div>
 
                 )}
 
