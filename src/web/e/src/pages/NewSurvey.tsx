@@ -51,10 +51,21 @@ export default function NewSurvey() {
                                 <div className="m-6 text-black text-center text-5xl">
                                     Main traits
                                 </div>
-                                <div className="flex flex-col justify-center text-white m-12">
-                                    <Field className="m-4 bg-black h-16 w-64 rounded-lg" name='mainTraits[0]'/>
-                                    <Field className="m-4 bg-black h-16 rounded-lg" name='mainTraits[1]'/>
-                                    <Field className="m-4 bg-black h-16 rounded-lg" name='mainTraits[2]'/>
+                                <div className="flex flex-col justify-center text-gray-300 m-12">
+                                    <div className="relative m-4 bg-gray-400 h-14 w-64 rounded-lg">
+                                        <span className="absolute top-3.5 left-4 text-lg">You are a</span>
+                                        <Field className="absolute m-4 h-6 w-36 left-20 bottom-0 bg-gray-400 text-lg" name='mainTraits[0]'/>
+                                    </div>
+                                    
+                                    <div className="relative m-4 bg-gray-400 h-14 w-64 rounded-lg">
+                                        <span className="absolute top-3.5 left-4 text-lg">You are a</span>
+                                        <Field className="absolute m-4 h-6 w-36 left-20 bottom-0 bg-gray-400 text-lg" name='mainTraits[1]'/>
+                                    </div>
+                                    
+                                    <div className="relative m-4 bg-gray-400 h-14 w-64 rounded-lg">
+                                        <span className="absolute top-3.5 left-4 text-lg">You are a</span>
+                                        <Field className="absolute m-4 h-6 w-36 left-20 bottom-0 bg-gray-400 text-lg" name='mainTraits[2]'/>
+                                    </div>
                                 </div>
                             </div>
 
