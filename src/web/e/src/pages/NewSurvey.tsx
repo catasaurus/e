@@ -25,7 +25,7 @@ export default function NewSurvey() {
     })
 
     return (
-        <div className="scroll-smooth">
+        <div>
             <Formik
                 initialValues={{
                     mainTraits: ['', '', ''],
@@ -47,8 +47,8 @@ export default function NewSurvey() {
             >
                 {({isSubmitting}) => (
                     <div className="flex flex-row justify-center">
-                        <Form className="flex flex-col">
-                            <div className="flex flex-col justify-center h-screen bg-gray-500">
+                        <Form className="flex flex-col snap-mandatory snap-y">
+                            <div className="flex flex-col justify-center h-screen bg-gray-500 snap-center shrink-0">
                                 <div className="m-6 text-black text-center text-5xl">
                                     Main traits
                                 </div>
@@ -71,14 +71,12 @@ export default function NewSurvey() {
 
                                 </div>
 
-                                <div className="relative top-24 flex flex-row justify-center">
-                                    <Link href="#subtraits" className="flex flex-col justify-center bg-black h-20 w-36 rounded-lg text-white text-center text-2xl">
-                                        <span>Next</span>
-                                    </Link>
-                                </div>
+                                <Link scroll={false} href="#subtraits" className="relative mx-auto -bottom-24 flex flex-col justify-center bg-black h-20 w-36 rounded-lg text-white text-center text-2xl">
+                                    <span>Next</span>
+                                </Link>
                             </div>
 
-                            <div className="flex flex-col justify-center h-screen bg-gray-500" id="subtraits">
+                            <div className="flex flex-col justify-center h-screen bg-gray-500 snap-center shrink-0" id="subtraits">
                                 <div className="m-6 text-black text-center text-5xl">
                                     Sub traits
                                 </div>
