@@ -20,13 +20,14 @@ export async function runSurvey(mainTraits: string[], subTraits: string[], miniT
     })
 
     for (const user of users) {
-        const answer = await askQuestionPalm(user, question);
+        const { result, raw } = await askQuestionPalm(user, question);
 
 
         const newEntry = await prisma.surveyEntry.create({
             data: {
                 user: user,
-                result: answer,
+                result: result,
+                raw: raw,
                 survey: {
                     connect: { id: newSurvey.id }
                 }
@@ -35,7 +36,7 @@ export async function runSurvey(mainTraits: string[], subTraits: string[], miniT
     }
 }
 
-
+/*
 // for running in deno / ts-node
 export interface entry {
     user: string,
@@ -55,3 +56,4 @@ export async function runSurveyNoPrisma(mainTraits: string[], subTraits: string[
 
     return entries
 }
+*/

@@ -46,7 +46,14 @@ export async function askQuestionOpenAI(user: string, question: string): Promise
     return false;
 }
 
-export async function askQuestionPalm(user: string, question: string): Promise<boolean> {
+const questionResponse = z.object({
+    result: z.boolean(),
+    raw: z.string()
+});
+
+type questionResponse = z.infer<typeof questionResponse>;
+
+export async function askQuestionPalm(user: string, question: string): Promise<questionResponse> {
         // questions should be yes or no
 
     const completion = await client.generateText({
@@ -60,10 +67,15 @@ export async function askQuestionPalm(user: string, question: string): Promise<b
         }
     })
 
+    const result = {
+        result: false,
+        raw: completion
+    };
+
     if (completion != undefined) {
         if (completion.toLowerCase() == 'yes') {
-            return true;
+            result.result = true
         }
     }
-    return false;
+    return questionResponse.parse(result);
 }
