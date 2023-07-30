@@ -3,6 +3,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { api } from 'e/utils/api';
+import Link from 'next/link';
 
 export interface runSurveyInput {
     mainTraits: string[],
@@ -24,7 +25,7 @@ export default function NewSurvey() {
     })
 
     return (
-        <div>
+        <div className="scroll-smooth">
             <Formik
                 initialValues={{
                     mainTraits: ['', '', ''],
@@ -51,6 +52,7 @@ export default function NewSurvey() {
                                 <div className="m-6 text-black text-center text-5xl">
                                     Main traits
                                 </div>
+
                                 <div className="flex flex-col justify-center text-gray-300 m-12">
                                     <div className="relative m-4 bg-gray-400 h-14 w-64 rounded-lg">
                                         <span className="absolute top-3.5 left-4 text-lg">You are a</span>
@@ -66,10 +68,17 @@ export default function NewSurvey() {
                                         <span className="absolute top-3.5 left-4 text-lg">You are a</span>
                                         <Field className="absolute m-4 h-6 w-36 left-20 bottom-0 bg-gray-400 text-lg" name='mainTraits[2]'/>
                                     </div>
+
+                                </div>
+
+                                <div className="relative top-24 flex flex-row justify-center">
+                                    <Link href="#subtraits" className="flex flex-col justify-center bg-black h-20 w-36 rounded-lg text-white text-center text-2xl">
+                                        <span>Next</span>
+                                    </Link>
                                 </div>
                             </div>
 
-                            <div className="flex flex-col justify-center h-screen bg-gray-500">
+                            <div className="flex flex-col justify-center h-screen bg-gray-500" id="subtraits">
                                 <div className="m-6 text-black text-center text-5xl">
                                     Sub traits
                                 </div>
