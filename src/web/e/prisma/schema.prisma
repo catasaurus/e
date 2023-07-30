@@ -64,11 +64,14 @@ model VerificationToken {
 }
 
 model SurveyEntry {
-  id           String     @id @default(cuid())
-  user         String
-  result       Boolean
-  survey       Survey     @relation(fields: [surveyId], references: [id])
-  surveyId     String
+  id       String  @id @default(cuid())
+  user     String
+  result   Boolean
+  survey   Survey  @relation(fields: [surveyId], references: [id])
+  surveyId String
+  // raw response from LLM
+  // for debugging purposes
+  raw      String
 
   @@index([surveyId])
 }
