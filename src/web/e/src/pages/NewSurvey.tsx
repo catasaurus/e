@@ -3,7 +3,6 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { api } from 'e/utils/api';
-import { runSurvey, runSurveyNoPrisma } from 'e/server/services/runSurvey';
 
 export interface runSurveyInput {
     mainTraits: string[],
