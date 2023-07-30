@@ -3,15 +3,24 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { api } from 'e/utils/api';
+import { runSurvey, runSurveyNoPrisma } from 'e/server/services/runSurvey';
 
+export interface runSurveyInput {
+    mainTraits: string[],
+    subTraits: string[],
+    miniTraits: string[],
+    question: string
+}
 
 export default function NewSurvey() {
     const { data: session } = useSession();
     const router = useRouter();
+    const {mutate, error} = api.survey.runSurvey.useMutation();
+
 
     useEffect(() => {
         if (!session) {
-            router.push('/')
+            void router.push('/')
         }
     })
 
@@ -24,15 +33,15 @@ export default function NewSurvey() {
                     miniTraits: ['', '', ''],
                     question: ''
                 }}
-                onSubmit={(values, { setSubmitting }) => {
-                    setSubmitting(false);
+                onSubmit={(values) => {
+                    //setSubmitting(false);
                     const input = {
                         mainTraits: values.mainTraits,
                         subTraits: values.subTraits,
                         miniTraits: values.miniTraits,
                         question: values.question
                     };
-                    api.survey.runSurvey.useQuery(input);
+                    mutate(input);
                 }}
 
             >

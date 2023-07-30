@@ -6,7 +6,7 @@ export const surveyRouter = createTRPCRouter({
     // procedure is protected so session is guaranteed not to be undefined
     runSurvey: protectedProcedure
         .input(z.object({ mainTraits: z.array(z.string()), subTraits: z.array(z.string()), miniTraits: z.array(z.string()), question: z.string() }))
-        .query(({ ctx, input }) => {
-            runSurvey(input.mainTraits, input.subTraits, input.miniTraits, input.question, ctx.session.user.id, ctx.prisma)
+        .mutation(({ ctx, input }) => {
+            void runSurvey(input.mainTraits, input.subTraits, input.miniTraits, input.question, ctx.session.user.id, ctx.prisma)
         })
 })

@@ -1,6 +1,6 @@
 import generateUsers from "./createUsers";
 import { askQuestionPalm } from "./askQuestion";
-import { PrismaClient } from "@prisma/client";
+import type { PrismaClient } from "@prisma/client";
 
 export async function runSurvey(mainTraits: string[], subTraits: string[], miniTraits: string[], question: string, userId: string, prisma: PrismaClient): Promise<void> {
     const users = generateUsers(mainTraits, subTraits, miniTraits);
