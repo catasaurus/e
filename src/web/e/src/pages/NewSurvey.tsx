@@ -133,9 +133,17 @@ export default function NewSurvey() {
                             </div>
 
                             <div className="flex flex-col justify-center h-screen bg-gray-500 text-white scroll-snap-align-start shrink-0" id="submitsection">
-                                <Field name="question" className="m-4 bg-black h-16 w-64 rounded-lg"/>
+                                <div className="relative text-black text-center text-5xl -top-40">
+                                    survey question
+                                </div>
 
-                                <button type="submit" disabled={isSubmitting} className="m-4 bg-black h-12 w-28 rounded-lg">
+                                <span className="relative text-m top-2 text-center text-gray-800">must have have a yes or no answer</span>
+                                
+                                <div className="mx-auto relative m-4 bg-gray-400 h-14 w-64 rounded-lg">
+                                        <Field className="absolute m-4 h-6 w-36 left-16 bottom-0 bg-gray-400 text-lg" name='question'/>
+                                    </div>
+
+                                <button type="submit" disabled={isSubmitting} className="relative mx-auto m-4 bg-black h-16 w-32 rounded-lg -bottom-48">
                                     Submit
                                 </button>
                             </div>
