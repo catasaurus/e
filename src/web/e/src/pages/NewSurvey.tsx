@@ -80,25 +80,59 @@ export default function NewSurvey() {
                                 <div className="m-6 text-black text-center text-5xl">
                                     Sub traits
                                 </div>
-                                <div className="flex flex-col justify-center text-white m-12">
-                                    <Field className="m-4 bg-black h-16 w-64 rounded-lg" name='subTraits[0]'/>
-                                    <Field className="m-4 bg-black h-16 rounded-lg" name='subTraits[1]'/>
-                                    <Field className="m-4 bg-black h-16 rounded-lg" name='subTraits[2]'/>
+
+                                <div className="flex flex-col justify-center text-gray-300 m-12">
+                                    <div className="relative m-4 bg-gray-400 h-14 w-64 rounded-lg">
+                                        <span className="absolute top-3.5 left-2 text-lg">You like to</span>
+                                        <Field className="absolute m-4 h-6 w-36 left-20 bottom-0 bg-gray-400 text-lg" name='subTraits[0]'/>
+                                    </div>
+                                    
+                                    <div className="relative m-4 bg-gray-400 h-14 w-64 rounded-lg">
+                                        <span className="absolute top-3.5 left-2 text-lg">You like to</span>
+                                        <Field className="absolute m-4 h-6 w-36 left-20 bottom-0 bg-gray-400 text-lg" name='subTraits[1]'/>
+                                    </div>
+                                    
+                                    <div className="relative m-4 bg-gray-400 h-14 w-64 rounded-lg">
+                                        <span className="absolute top-3.5 left-2 text-lg">You like to</span>
+                                        <Field className="absolute m-4 h-6 w-36 left-20 bottom-0 bg-gray-400 text-lg" name='subTraits[2]'/>
+                                    </div>
+
                                 </div>
+
+                                <Link scroll={false} href="#minitraits" className="relative mx-auto -bottom-24 flex flex-col justify-center bg-black h-20 w-36 rounded-lg text-white text-center text-2xl">
+                                    <span>Next</span>
+                                </Link>
                             </div>
 
-                            <div className="flex flex-col justify-center h-screen bg-gray-500">
+                            <div className="flex flex-col justify-center h-screen bg-gray-500 scroll-snap-align-start shrink-0" id="minitraits">
                                 <div className="m-6 text-black text-center text-5xl">
                                     Mini traits
                                 </div>
-                                <div className="flex flex-col justify-center text-white m-12">
-                                    <Field className="m-4 bg-black h-16 w-64 rounded-lg" name='miniTraits[0]'/>
-                                    <Field className="m-4 bg-black h-16 rounded-lg" name='miniTraits[1]'/>
-                                    <Field className="m-4 bg-black h-16 rounded-lg" name='miniTraits[2]'/>
+
+                                <div className="flex flex-col justify-center text-gray-300 m-12">
+                                    <div className="relative m-4 bg-gray-400 h-14 w-64 rounded-lg">
+                                        <span className="absolute top-3.5 left-2 text-lg">You also</span>
+                                        <Field className="absolute m-4 h-6 w-36 left-16 bottom-0 bg-gray-400 text-lg" name='miniTraits[0]'/>
+                                    </div>
+                                    
+                                    <div className="relative m-4 bg-gray-400 h-14 w-64 rounded-lg">
+                                        <span className="absolute top-3.5 left-2 text-lg">You also</span>
+                                        <Field className="absolute m-4 h-6 w-36 left-16 bottom-0 bg-gray-400 text-lg" name='miniTraits[1]'/>
+                                    </div>
+                                    
+                                    <div className="relative m-4 bg-gray-400 h-14 w-64 rounded-lg">
+                                        <span className="absolute top-3.5 left-2 text-lg">You also</span>
+                                        <Field className="absolute m-4 h-6 w-36 left-16 bottom-0 bg-gray-400 text-lg" name='miniTraits[2]'/>
+                                    </div>
+
                                 </div>
+
+                                <Link scroll={false} href="#submitsection" className="relative mx-auto -bottom-24 flex flex-col justify-center bg-black h-20 w-36 rounded-lg text-white text-center text-2xl">
+                                    <span>Next</span>
+                                </Link>
                             </div>
 
-                            <div className="flex flex-col justify-center h-screen bg-gray-500 text-white">
+                            <div className="flex flex-col justify-center h-screen bg-gray-500 text-white scroll-snap-align-start shrink-0" id="submitsection">
                                 <Field name="question" className="m-4 bg-black h-16 w-64 rounded-lg"/>
 
                                 <button type="submit" disabled={isSubmitting} className="m-4 bg-black h-12 w-28 rounded-lg">
