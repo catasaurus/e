@@ -23,11 +23,37 @@ export const surveyRouter = createTRPCRouter({
             const surveys = await ctx.prisma.survey.findMany({
                 where: {
                     user: ctx.session.user
+                },
+                select: {
+                    question: true,
+                    userCount: true,
+                    SurveyEntry: true
                 }
+            }).then((result) => {
+                const output: surveyInfo[] = [];
+
+                for (const survey of result) {
+                    let status = true;
+
+                    if (survey.SurveyEntry.length != survey.userCount) {
+                        status = false;
+                    }
+                    const newEntry: surveyInfo = {
+                        question: survey.question,
+                        status: status
+                    }
+
+                    output.push(newEntry)
+                }
+                
+                return output
+            }).catch(() => {
+                const output: surveyInfo[] =  []
+                return output
             })
 
-            const output = []
 
-            return 
+
+            return surveys
         })
 })
