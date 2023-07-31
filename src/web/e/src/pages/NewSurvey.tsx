@@ -47,8 +47,8 @@ export default function NewSurvey() {
             >
                 {({isSubmitting}) => (
                     <div className="flex flex-row justify-center">
-                        <Form className="flex flex-col snap-mandatory snap-y">
-                            <div className="flex flex-col justify-center h-screen bg-gray-500 snap-center shrink-0">
+                        <Form className="flex flex-col scroll-snap-type-y mandatory overflow-scroll">
+                            <div className="flex flex-col justify-center h-screen bg-gray-500 scroll-snap-align-start shrink-0">
                                 <div className="m-6 text-black text-center text-5xl">
                                     Main traits
                                 </div>
@@ -76,7 +76,7 @@ export default function NewSurvey() {
                                 </Link>
                             </div>
 
-                            <div className="flex flex-col justify-center h-screen bg-gray-500 snap-center shrink-0" id="subtraits">
+                            <div className="flex flex-col justify-center h-screen bg-gray-500 scroll-snap-align-start shrink-0" id="subtraits">
                                 <div className="m-6 text-black text-center text-5xl">
                                     Sub traits
                                 </div>
