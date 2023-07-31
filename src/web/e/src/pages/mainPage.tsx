@@ -49,27 +49,42 @@ export default function MainPage() {
             void router.push('/NewSurvey')
         }
     
-        let newSurveyButtonStyle = "flex bg-black h-16 w-32 text-center text-white rounded-lg m-5 relative";
+        let newSurveyButtonStyle = "flex bg-black h-16 w-32 text-center text-white rounded-lg m-5 mx-auto";
         if (isHovered) {
-            newSurveyButtonStyle = "flex bg-black h-20 w-36 text-center text-white rounded-lg m-5 relative"
+            newSurveyButtonStyle = "flex bg-black h-20 w-36 text-center text-white rounded-lg m-5 mx-auto";
         }
         
         const surveyItems: JSX.Element[] = [];
+        let key = 0;
         if (surveys.data != undefined) {
             for (const survey of surveys.data) {
-                surveyItems.push(<div>
+                let statusMessage = "processing";
+                if (survey.status) {
+                    statusMessage = "completed"
+                }
+
+                surveyItems.push(
+                <div className="m-28" key={key}>
                     question: {survey.question}
-                    statsu: {survey.status}
-                </div>)
+                    status: {statusMessage}
+                </div>
+                )
+                key += 1
             }
         }
     
         return (
             <div className="flex justify-center">
-                <div className={newSurveyButtonStyle} onMouseEnter={newSurveyButtonOnMouseEnter} onMouseLeave={newSurveyButtonOnMouseLeave} onClick={newSurveyOnClick}>
-                    <span className="m-auto">New survey</span>
+                <div className="fixed w-screen">
+                    <div className={newSurveyButtonStyle} onMouseEnter={newSurveyButtonOnMouseEnter} onMouseLeave={newSurveyButtonOnMouseLeave} onClick={newSurveyOnClick}>
+                        <span className="m-auto ">New survey</span>
+                    </div>
+                    <div className="h-0.5 bg-slate-500 bg-opacity-20"/>
                 </div>
-                {surveyItems}
+
+                <div className="relative top-20 flex flex-wrap">
+                    {surveyItems}
+                </div>
             </div>
         )
     }
