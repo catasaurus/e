@@ -85,11 +85,11 @@ export default function MainPage() {
                         )
                 }
                 else {
-                    console.log(survey.surveyId)
-                    console.log(surveyCardHoveredKey)
+                    //console.log(survey.surveyId)
+                    //console.log(surveyCardHoveredKey)
                     if (surveyCardHoveredKey == survey.surveyId) {
-                        console.log("key matches")
-                        surveyCardStyle = "flex flex-col justify-center m-28 bg-gray-50 h-48 w-72 rounded-xl shadow-xl border-gray-500 border"
+                        //console.log("key matches")
+                        surveyCardStyle = "flex flex-col justify-center m-28 bg-gray-50 h-48 w-72 rounded-xl shadow-2xl border-gray-500 border border-opacity-5"
                     }
 
                     console.log(surveyCardStyle)
@@ -106,7 +106,7 @@ export default function MainPage() {
             })
         }
         
-        console.log(surveyItems)
+        //console.log(surveyItems)
         return (
             <div className="flex justify-center">
                 <div className="fixed w-screen">
