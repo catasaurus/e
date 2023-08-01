@@ -16,7 +16,7 @@ export default function MainPage() {
 
     const [isHovered, setIsHovered] = useState(false);
     const [isQueryCompleted, setIsQueryCompleted] = useState(false);
-    const [isSurveyCardHovered, setIsSurveyCardHovered] = useState(false);
+    const [surveyCardHoveredKey, setSurveyCardHoveredKey] = useState<string>();
 
     // takes not input as userId is all that is needed, and it is passed as context automatically
     const surveys = api.survey.getSurveys.useQuery({});
@@ -49,12 +49,13 @@ export default function MainPage() {
             void router.push('/NewSurvey');
         }
 
-        function surveyCardOnMouseEnter() {
-            setIsSurveyCardHovered(true);
+        function surveyCardOnMouseEnter(key: string) {
+            setSurveyCardHoveredKey(key);
+            //console.log("surveycard + " + key)
         }
 
         function surveyCardOnMouseLeave() {
-            setIsSurveyCardHovered(false);
+            setSurveyCardHoveredKey(undefined);
         }
     
     
@@ -62,16 +63,14 @@ export default function MainPage() {
         if (isHovered) {
             newSurveyButtonStyle = "flex bg-black h-20 w-36 text-center text-white rounded-lg m-5 mx-auto";
         }
-
-        let surveyCardStyle = "flex flex-col justify-center m-28 bg-gray-50 h-48 w-72 rounded-xl shadow-lg";
-        if (isSurveyCardHovered) {
-            surveyCardStyle = "flex flex-col justify-center m-28 bg-gray-50 h-48 w-72 rounded-xl shadow-xl border-black border-"
-        }
         
         const surveyItems: JSX.Element[] = [];
-        let key = 0;
         if (surveys.data != undefined) {
-            for (const survey of surveys.data) {
+
+            //let key = 0;
+            let surveyCardStyle = "flex flex-col justify-center m-28 bg-gray-50 h-48 w-72 rounded-xl shadow-lg";
+
+            surveys.data.map((survey) => {
                 /*
                 let statusMessage = "processing";
                 if (survey.status) {
@@ -79,24 +78,35 @@ export default function MainPage() {
                 }
                 */
                 if (!survey.status) {
-                surveyItems.push(
-                    <div className="flex flex-col justify-center m-28 bg-gray-50 h-48 w-72 rounded-xl shadow-lg" key={key}>
-                        <DotLoader loading={!survey.status} color={'#DCD6D0'} size={40} className="mx-auto"/>
-                    </div>
-                    )
+                    surveyItems.push(
+                        <div className="flex flex-col justify-center m-28 bg-gray-50 h-48 w-72 rounded-xl shadow-lg" key={survey.surveyId}>
+                            <DotLoader loading={!survey.status} color={'#DCD6D0'} size={40} className="mx-auto"/>
+                        </div>
+                        )
                 }
                 else {
+                    console.log(survey.surveyId)
+                    console.log(surveyCardHoveredKey)
+                    if (surveyCardHoveredKey == survey.surveyId) {
+                        console.log("key matches")
+                        surveyCardStyle = "flex flex-col justify-center m-28 bg-gray-50 h-48 w-72 rounded-xl shadow-xl border-gray-500 border"
+                    }
+
+                    console.log(surveyCardStyle)
                     surveyItems.push(
-                        <div className={surveyCardStyle} key={key} onMouseEnter={surveyCardOnMouseEnter} onMouseLeave={surveyCardOnMouseLeave}>
+                        <div className={surveyCardStyle} key={survey.surveyId} onMouseEnter={() => surveyCardOnMouseEnter(survey.surveyId)} onMouseLeave={surveyCardOnMouseLeave}>
                             <span className="mx-auto text-gray-500 font-extralight">{survey.question}</span>
                         </div>
                         
                     )
                 }
-                key += 1
-            }
+                surveyCardStyle = "flex flex-col justify-center m-28 bg-gray-50 h-48 w-72 rounded-xl shadow-lg";
+
+                //key++
+            })
         }
-    
+        
+        console.log(surveyItems)
         return (
             <div className="flex justify-center">
                 <div className="fixed w-screen">

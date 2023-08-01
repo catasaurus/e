@@ -5,7 +5,9 @@ import { runSurvey } from "e/server/services/runSurvey";
 export interface surveyInfo {
     question: string,
     // true if completed false if processing or an error has occured
-    status: boolean
+    status: boolean,
+    // for generating keys for JSX elements
+    surveyId: string
 }
 
 export const surveyRouter = createTRPCRouter({
@@ -27,7 +29,8 @@ export const surveyRouter = createTRPCRouter({
                 select: {
                     question: true,
                     userCount: true,
-                    SurveyEntry: true
+                    SurveyEntry: true,
+                    id: true
                 }
             }).then((result) => {
                 const output: surveyInfo[] = [];
@@ -40,7 +43,8 @@ export const surveyRouter = createTRPCRouter({
                     }
                     const newEntry: surveyInfo = {
                         question: survey.question,
-                        status: status
+                        status: status,
+                        surveyId: survey.id
                     }
 
                     output.push(newEntry)
