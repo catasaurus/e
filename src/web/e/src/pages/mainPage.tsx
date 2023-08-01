@@ -18,6 +18,8 @@ export default function MainPage() {
     const [isHovered, setIsHovered] = useState(false);
     const [isQueryCompleted, setIsQueryCompleted] = useState(false);
     const [surveyCardHoveredKey, setSurveyCardHoveredKey] = useState<string>();
+    const [refresh, setRefresh] = useState(false);
+    const [isRefreshHovered, setIsRefreshHovered] = useState(false);
 
     // takes not input as userId is all that is needed, and it is passed as context automatically
     const surveys = api.survey.getSurveys.useQuery({});
@@ -58,12 +60,26 @@ export default function MainPage() {
         function surveyCardOnMouseLeave() {
             setSurveyCardHoveredKey(undefined);
         }
-    
-    
+
+        function refreshOnMouseClick() {
+            setRefresh(true);
+        }
+
+        function refreshOnMouseEnter(key: string) {
+            setIsRefreshHovered(true);
+            //console.log("surveycard + " + key)
+        }
+
+        function refreshOnMouseLeave() {
+            setIsRefreshHovered(false);
+        }
+
         let newSurveyButtonStyle = "flex bg-black h-16 w-32 text-center text-white rounded-lg m-5 mx-auto";
         if (isHovered) {
             newSurveyButtonStyle = "flex bg-black h-20 w-36 text-center text-white rounded-lg m-5 mx-auto";
         }
+
+        let refreshButtonStyle = "";
         
         const surveyItems: JSX.Element[] = [];
         if (surveys.data != undefined) {
@@ -97,7 +113,6 @@ export default function MainPage() {
                     surveyItems.push(
                         <div className={surveyCardStyle} key={survey.surveyId} onMouseEnter={() => surveyCardOnMouseEnter(survey.surveyId)} onMouseLeave={surveyCardOnMouseLeave}>
                             <span className="mx-auto text-gray-500 font-extralight">{survey.question}</span>
-                            <SyncIcon className="relative top-10 mx-auto" size={24}/>
                         </div>
                         
                     )
@@ -110,13 +125,18 @@ export default function MainPage() {
         
         //console.log(surveyItems)
         return (
-            <div className="flex justify-center">
+            <div className="relative">
                 <div className="fixed w-screen">
-                    <div className={newSurveyButtonStyle} onMouseEnter={newSurveyButtonOnMouseEnter} onMouseLeave={newSurveyButtonOnMouseLeave} onClick={newSurveyOnClick}>
-                        <span className="m-auto">New survey</span>
+                    <div className="flex flex-row justify-center">
+                        <div className={newSurveyButtonStyle} onMouseEnter={newSurveyButtonOnMouseEnter} onMouseLeave={newSurveyButtonOnMouseLeave} onClick={newSurveyOnClick}>
+                            <span className="m-auto">New survey</span>
+                        </div>
+                        
+                        <div className={refreshButtonStyle} >
+                            <SyncIcon className="m-auto" size={40}/>
+                        </div>
                     </div>
-
-                    <div className="h-0.5 bg-slate-500 bg-opacity-20"/>
+                    <div className="h-0.5 bg-slate-500 bg-opacity-20 w-screen"/>
                 </div>
 
                 <div className="relative top-20 flex flex-wrap">
@@ -125,8 +145,6 @@ export default function MainPage() {
             </div>
         )
     }
-
-
 
     return (
         <div className="flex flex-row justify-center h-screen">
