@@ -21,12 +21,13 @@ export default function MainPage() {
     const [refresh, setRefresh] = useState(false);
     const [isRefreshHovered, setIsRefreshHovered] = useState(false);
 
-    // takes not input as userId is all that is needed, and it is passed as context automatically
+    // takes no input as userId is all that is needed, and it is passed as context automatically
     const surveys = api.survey.getSurveys.useQuery({});
 
     useEffect(() => {
         if (surveys.status == 'success') {
-            setIsQueryCompleted(true)
+            setIsQueryCompleted(true);
+            setRefresh(false);
         }
         else if (surveys.status == 'error') {
             void router.push('/')
@@ -39,7 +40,7 @@ export default function MainPage() {
         }
     }, [session])
 
-    if (isQueryCompleted) {
+    if (isQueryCompleted && !refresh) {
         function newSurveyButtonOnMouseEnter() {
             setIsHovered(true);
         }
@@ -63,9 +64,10 @@ export default function MainPage() {
 
         function refreshOnMouseClick() {
             setRefresh(true);
+            setIsQueryCompleted(false);
         }
 
-        function refreshOnMouseEnter(key: string) {
+        function refreshOnMouseEnter() {
             setIsRefreshHovered(true);
             //console.log("surveycard + " + key)
         }
@@ -76,10 +78,13 @@ export default function MainPage() {
 
         let newSurveyButtonStyle = "flex bg-black h-16 w-32 text-center text-white rounded-lg m-5 mx-auto";
         if (isHovered) {
-            newSurveyButtonStyle = "flex bg-black h-20 w-36 text-center text-white rounded-lg m-5 mx-auto";
+            newSurveyButtonStyle = "flex bg-gray-900 h-16 w-32 text-center text-white rounded-lg m-5 mx-auto shadow-xl";
         }
 
-        let refreshButtonStyle = "";
+        let refreshButtonStyle = "bg-gray-200 shadow-lg h-12 w-12 flex rounded-bl-lg";
+        if (isRefreshHovered) {
+            refreshButtonStyle = "bg-gray-300 shadow-xl h-12 w-12 flex rounded-bl-lg"
+        }
         
         const surveyItems: JSX.Element[] = [];
         if (surveys.data != undefined) {
@@ -132,7 +137,7 @@ export default function MainPage() {
                             <span className="m-auto">New survey</span>
                         </div>
                         
-                        <div className={refreshButtonStyle} >
+                        <div className={refreshButtonStyle} onMouseEnter={refreshOnMouseEnter} onMouseLeave={refreshOnMouseLeave} onClick={refreshOnMouseClick}>
                             <SyncIcon className="m-auto" size={40}/>
                         </div>
                     </div>
@@ -151,7 +156,7 @@ export default function MainPage() {
             <div className="flex flex-col justify-center">
                 <SquareLoader
                     color={'black'}
-                    loading={isQueryCompleted}
+                    loading={!isQueryCompleted}
                     speedMultiplier={1.5}
                 />
             </div>
