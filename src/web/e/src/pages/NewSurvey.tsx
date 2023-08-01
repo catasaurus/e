@@ -42,6 +42,8 @@ export default function NewSurvey() {
                         question: values.question
                     };
                     mutate(input);
+
+                    void router.push('/MainPage')
                 }}
 
             >

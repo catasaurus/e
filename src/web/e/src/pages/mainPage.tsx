@@ -3,6 +3,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { api } from "e/utils/api";
 import { SquareLoader, DotLoader } from "react-spinners";
+import { SyncIcon } from "@primer/octicons-react";
 
 /*
 export interface mainPageProps {
@@ -96,6 +97,7 @@ export default function MainPage() {
                     surveyItems.push(
                         <div className={surveyCardStyle} key={survey.surveyId} onMouseEnter={() => surveyCardOnMouseEnter(survey.surveyId)} onMouseLeave={surveyCardOnMouseLeave}>
                             <span className="mx-auto text-gray-500 font-extralight">{survey.question}</span>
+                            <SyncIcon className="relative top-10 mx-auto" size={24}/>
                         </div>
                         
                     )
@@ -113,6 +115,7 @@ export default function MainPage() {
                     <div className={newSurveyButtonStyle} onMouseEnter={newSurveyButtonOnMouseEnter} onMouseLeave={newSurveyButtonOnMouseLeave} onClick={newSurveyOnClick}>
                         <span className="m-auto">New survey</span>
                     </div>
+
                     <div className="h-0.5 bg-slate-500 bg-opacity-20"/>
                 </div>
 
