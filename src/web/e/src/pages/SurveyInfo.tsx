@@ -31,13 +31,58 @@ export default function SurveyInfo() {
     })
 
     if (isQueryCompleted) {
+        // I know all of this is not optimal for performance
+        // too much to do to add traits, etc when creating entry
         if (survey.data != undefined && typeof survey.data != "string") {
-            const stats = {};
-            const s = z.string()
+            const counts: Record<string, boolean[]> = {};
+            const s = z.string();
             survey.data.SurveyEntry.map((entry) => {
                 const mainTrait: string = s.parse(entry.user.slice(9).split(". You also")[0]).trim();
-                const subTrait: string = s.parse(s.parse(entry.user.slice(9).split(". You also")[1]).split("A fact about you is that you:")[1]).trim();
+                const subTrait: string = s.parse(s.parse(entry.user.slice(9).split(". You also")[1]).split(". A fact about you is that you:")[0]).trim();
+                const miniTrait: string = s.parse(s.parse(entry.user.slice(9).split(". You also")[1]).split(". A fact about you is that you:")[1]).trim();
+                
+                counts[mainTrait] = [entry.result].concat(counts[mainTrait]!);
+                counts[subTrait] = [entry.result].concat(counts[subTrait]!);
+                counts[miniTrait] = [entry.result].concat(counts[miniTrait]!);
             })
+
+            //console.log(counts)
+
+            // percentage that is true
+            const stats: Record<string, number> = {};
+
+            for (const key in counts) {
+                const length: number = counts[key]!.length
+                let trueCount = 0;
+
+                for (const result of counts[key]!) {
+                    if (result == true) {
+                        trueCount++
+                    }
+                }
+
+                stats[key] = (trueCount / length) * 100;
+            }
+
+            const items: JSX.Element[] = [];
+
+            for (const key in stats) {
+                items.push(
+                    <div key={key} className="m-4">
+                        <span className="m-2">{key}</span>
+
+                        <span className="m-2">percent true: {stats[key]}</span>
+
+                        <span className="m-2">percent false: {100-stats[key]!}</span>
+                    </div>
+                )
+            }
+
+            return (
+                <div className="flex flex-col">
+                    {items}
+                </div>
+            )
         }
     }
 
