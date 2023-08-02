@@ -2,6 +2,16 @@ import generateUsers from "./createUsers";
 import { askQuestionPalm } from "./askQuestion";
 import type { PrismaClient } from "@prisma/client";
 
+/*
+export const wait = (ms: number) => {
+    const start = Date.now();
+    let now = start;
+    while (now - start < ms) {
+      now = Date.now();
+    }
+}
+*/
+
 export async function runSurvey(mainTraits: string[], subTraits: string[], miniTraits: string[], question: string, userId: string, prisma: PrismaClient): Promise<void> {
     const users = generateUsers(mainTraits, subTraits, miniTraits);
     const userLength = users.length;
@@ -20,19 +30,21 @@ export async function runSurvey(mainTraits: string[], subTraits: string[], miniT
     })
 
     for (const user of users) {
-        const { result, raw } = await askQuestionPalm(user, question);
-
-
-        const newEntry = await prisma.surveyEntry.create({
-            data: {
-                user: user,
-                result: result,
-                raw: raw,
-                survey: {
-                    connect: { id: newSurvey.id }
+        askQuestionPalm(user, question).then(({ result, raw }) => {
+            console.log("prisma surveyEntry being created")
+            const newEntry = prisma.surveyEntry.create({
+                data: {
+                    user: user,
+                    result: result,
+                    raw: raw,
+                    survey: {
+                        connect: { id: newSurvey.id }
+                    }
                 }
-            }
-        })
+            })
+        }).catch((err) => {
+            console.error(err)
+        });
     }
 }
 

@@ -22,12 +22,15 @@ export default function MainPage() {
     const [isRefreshHovered, setIsRefreshHovered] = useState(false);
 
     // takes no input as userId is all that is needed, and it is passed as context automatically
-    const surveys = api.survey.getSurveys.useQuery({});
+    // refresh is input, but it is there so that when it changes the query will run again
+    const surveys = api.survey.getSurveys.useQuery({refresh});
 
     useEffect(() => {
-        if (surveys.status == 'success') {
+        if (surveys.status == 'success' && isQueryCompleted == false) {
             setIsQueryCompleted(true);
-            setRefresh(false);
+            if (refresh == true) {
+                setRefresh(false);
+            }
         }
         else if (surveys.status == 'error') {
             void router.push('/')

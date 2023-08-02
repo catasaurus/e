@@ -54,7 +54,7 @@ const questionResponse = z.object({
 type questionResponse = z.infer<typeof questionResponse>;
 
 export async function askQuestionPalm(user: string, question: string): Promise<questionResponse> {
-        // questions should be yes or no
+    // questions should be yes or no
 
     const completion = await client.generateText({
         model: MODEL_NAME,
