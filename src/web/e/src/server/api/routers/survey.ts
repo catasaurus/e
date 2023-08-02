@@ -15,7 +15,7 @@ export const surveyRouter = createTRPCRouter({
     runSurvey: protectedProcedure
         .input(z.object({ mainTraits: z.array(z.string()), subTraits: z.array(z.string()), miniTraits: z.array(z.string()), question: z.string() }))
         .mutation(async ({ ctx, input }) => {
-            void await runSurvey(input.mainTraits, input.subTraits, input.miniTraits, input.question, ctx.session.user.id, ctx.prisma);
+            return await runSurvey(input.mainTraits, input.subTraits, input.miniTraits, input.question, ctx.session.user.id, ctx.prisma);
         }),
     
     getSurveys: protectedProcedure
