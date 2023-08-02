@@ -8,7 +8,7 @@ export const env = createEnv({
    */
   server: {
     DATABASE_URL: z.string().url(),
-    OPENAI_API_KEY: z.string().min(1),
+    //OPENAI_API_KEY: z.string().min(1),
     NODE_ENV: z.enum(["development", "test", "production"]),
     NEXTAUTH_SECRET:
       process.env.NODE_ENV === "production"
@@ -24,6 +24,8 @@ export const env = createEnv({
     // Add `.min(1) on ID and SECRET if you want to make sure they're not empty
     DISCORD_CLIENT_ID: z.string(),
     DISCORD_CLIENT_SECRET: z.string(),
+
+    PALM_API_KEY: z.string().min(1),
   },
 
   /**
@@ -46,7 +48,8 @@ export const env = createEnv({
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     DISCORD_CLIENT_ID: process.env.DISCORD_CLIENT_ID,
     DISCORD_CLIENT_SECRET: process.env.DISCORD_CLIENT_SECRET,
-    OPENAI_API_KEY: process.env.OPENAI_API_KEY
+    //OPENAI_API_KEY: process.env.OPENAI_API_KEY
+    PALM_API_KEY: process.env.PALM_API_KEY,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation.
