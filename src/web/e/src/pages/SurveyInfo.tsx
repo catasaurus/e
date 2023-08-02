@@ -68,19 +68,27 @@ export default function SurveyInfo() {
 
             for (const key in stats) {
                 items.push(
-                    <div key={key} className="m-4">
-                        <span className="m-2">{key}</span>
+                    <div key={key} className="mx-auto m-8 flex flex-col bg-gray-500 rounded-lg">
+                        <span className="m-4 text-center">{key}</span>
 
-                        <span className="m-2">percent true: {stats[key]}</span>
+                        <div className="flex flex-row justify-center">
+                            <span className="m-8">{stats[key]}% true</span>
 
-                        <span className="m-2">percent false: {100-stats[key]!}</span>
+                            <span className="m-8">{100-stats[key]!}% false</span>
+                        </div>
                     </div>
                 )
             }
 
             return (
-                <div className="flex flex-col">
-                    {items}
+                <div>
+                    <div className="fixed flex flex-col justify-center w-screen bg-gray-400 text-center text-3xl rounded-b-lg h-20">
+                        <span>{survey.data.question}</span>
+                    </div>
+
+                    <div className="relative top-20 flex flex-col justify-center">
+                        {items}
+                    </div>
                 </div>
             )
         }
