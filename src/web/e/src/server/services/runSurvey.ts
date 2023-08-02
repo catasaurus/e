@@ -30,9 +30,9 @@ export async function runSurvey(mainTraits: string[], subTraits: string[], miniT
     })
 
     for (const user of users) {
-        askQuestionPalm(user, question).then(({ result, raw }) => {
-            console.log("prisma surveyEntry being created")
-            const newEntry = prisma.surveyEntry.create({
+        askQuestionPalm(user, question).then(async ({ result, raw }) => {
+            console.log("prisma surveyEntry being created");
+            const newEntry = await prisma.surveyEntry.create({
                 data: {
                     user: user,
                     result: result,

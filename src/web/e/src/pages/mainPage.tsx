@@ -28,14 +28,15 @@ export default function MainPage() {
     useEffect(() => {
         if (surveys.status == 'success' && isQueryCompleted == false) {
             setIsQueryCompleted(true);
-            if (refresh == true) {
-                setRefresh(false);
-            }
         }
         else if (surveys.status == 'error') {
             void router.push('/')
         }
-    }, [surveys.status])
+
+        if (refresh == true) {
+            setRefresh(false);
+        }
+    }, [surveys.status, refresh])
 
     useEffect(() => {
         if (!session) {
