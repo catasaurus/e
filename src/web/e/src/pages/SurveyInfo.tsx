@@ -12,7 +12,7 @@ export default function SurveyInfo() {
     const [isQueryCompleted, setIsQueryCompleted] = useState(false);
 
     let surveyId = "";
-    if (router.query.surverId != undefined) {
+    if (router.query.surveyId != undefined) {
         surveyId = z.string().parse(router.query.surveyId);
     }
     const survey = api.survey.getSurveyData.useQuery({ surveyId: surveyId });
