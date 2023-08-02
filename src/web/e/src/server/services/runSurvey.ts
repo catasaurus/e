@@ -12,7 +12,7 @@ export const wait = (ms: number) => {
 }
 */
 
-export async function runSurvey(mainTraits: string[], subTraits: string[], miniTraits: string[], question: string, userId: string, prisma: PrismaClient): Promise<void> {
+export async function runSurvey(mainTraits: string[], subTraits: string[], miniTraits: string[], question: string, userId: string, prisma: PrismaClient): Promise<boolean> {
     const users = generateUsers(mainTraits, subTraits, miniTraits);
     const userLength = users.length;
 
@@ -46,6 +46,8 @@ export async function runSurvey(mainTraits: string[], subTraits: string[], miniT
             console.error(err)
         });
     }
+
+    return true;
 }
 
 /*
