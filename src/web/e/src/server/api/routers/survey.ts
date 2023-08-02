@@ -59,5 +59,27 @@ export const surveyRouter = createTRPCRouter({
 
 
             return surveys
+        }),
+    
+    getSurveyData: protectedProcedure
+        .input(z.object({surveyId: z.string()}))
+        .query( async ({ctx, input}) => {
+            const surveyInfo = await ctx.prisma.survey.findUnique({
+                where: {
+                    id: input.surveyId,
+                    userId: ctx.session.user.id
+                },
+                select: {
+                    question: true,
+                    SurveyEntry: true
+                }
+            }).then((result) => {
+                return result
+            }).catch((err) => {
+                console.log(err);
+                return "Invalid survey id or internal server error"
+            });
+
+            return surveyInfo;
         })
 })

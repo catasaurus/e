@@ -66,6 +66,10 @@ export default function MainPage() {
             setSurveyCardHoveredKey(undefined);
         }
 
+        function surveyCardOnClick(key: string) {
+            void router.push('/SurveyInfo?surveyId=' + key)
+        }
+
         function refreshOnMouseClick() {
             setRefresh(true);
             setIsQueryCompleted(false);
@@ -120,7 +124,7 @@ export default function MainPage() {
 
                     console.log(surveyCardStyle)
                     surveyItems.push(
-                        <div className={surveyCardStyle} key={survey.surveyId} onMouseEnter={() => surveyCardOnMouseEnter(survey.surveyId)} onMouseLeave={surveyCardOnMouseLeave}>
+                        <div className={surveyCardStyle} key={survey.surveyId} onMouseEnter={() => surveyCardOnMouseEnter(survey.surveyId)} onMouseLeave={surveyCardOnMouseLeave} onClick={() => surveyCardOnClick(survey.surveyId)}>
                             <span className="mx-auto text-gray-500 font-extralight">{survey.question}</span>
                         </div>
                         
