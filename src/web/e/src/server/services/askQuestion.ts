@@ -61,7 +61,9 @@ export async function askQuestionPalm(user: string, question: string): Promise<q
         model: MODEL_NAME,
         prompt: {
                 text: user + ". " + question + '. Answer yes or no without an explanation'
-            }
+            },
+    }, {
+       timeout: 5000
     }).then((result) => {
         if (result[0].candidates != undefined) {
             return result[0].candidates[0]?.output;
